@@ -1,11 +1,12 @@
 import type {LinksFunction} from "@remix-run/node";
+
 import appStylesHref from "./app.css?url";
 
 export const links: LinksFunction = () =>[
   {rel:"StyleSheet", href: appStylesHref},
 ];
 
-import {json} from "@remix-run/node";
+import {json, redirect} from "@remix-run/node";
 import {
   Form,
   Link,
@@ -22,7 +23,7 @@ import { createEmptyContact,getContacts } from "./data";
 
 export const action  = async ()=>{
   const contact = await createEmptyContact();
-  return json({contact});
+  return redirect(`/contacts/${contact.id}/edit`);
 };
 
 
