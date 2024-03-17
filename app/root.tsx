@@ -16,6 +16,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useNavigation,
 } from "@remix-run/react";
 
 
@@ -34,6 +35,7 @@ export const loader = async () => {
 
 export default function App() {
   const { contacts } = useLoaderData<typeof loader>();
+  const navigation = useNavigation();
 
   return (
     <html lang="en">
@@ -67,7 +69,7 @@ export default function App() {
               <ul>
                 {contacts.map((contact) => (
                   <li key={contact.id}>
-                    <NavLink
+                     <NavLink
                         className={({ isActive, isPending }) =>
                           isActive
                             ? "active"
@@ -102,7 +104,10 @@ export default function App() {
         </div>
 
         
-        <div id="Detail">
+        <div  className={
+            navigation.state === "loading" ? "loading" : ""
+          }
+          id="detail">
             <Outlet/>
         </div>
         <ScrollRestoration />
