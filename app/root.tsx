@@ -38,7 +38,7 @@ export const loader = async ({
     const url = new URL(request.url);
     const q=url.searchParams.get("q");
     const contacts = await getContacts(q);
-    return json({ contacts });
+    return json({ contacts,q });
 };
 
 export default function App() {
